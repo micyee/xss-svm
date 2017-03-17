@@ -45,10 +45,10 @@ def etl(filename,data,isxss):
         file_object.close( )
     return data
 
-#etl('xss-10000.txt',x,1)
-#etl('good-xss-10000.txt',x,0)
-etl('xss-200000.txt',x,1)
-etl('good-xss-200000.txt',x,0)
+etl('xss-50000.txt',x,1)
+etl('good-xss-50000.txt',x,0)
+#etl('xss-200000.txt',x,1)
+#etl('good-xss-200000.txt',x,0)
 
 
 x_train, x_test, y_train, y_test = cross_validation.train_test_split(x,y, test_size=0.4, random_state=0)
