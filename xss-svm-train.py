@@ -46,25 +46,18 @@ def etl(filename,data,isxss):
         file_object.close( )
     return data
 
-#etl('xss-50000.txt',x,1)
-#etl('good-xss-50000.txt',x,0)
-etl('xss-200000.txt',x,1)
-etl('good-xss-200000.txt',x,0)
+etl('xss-50000.txt',x,1)
+etl('good-xss-50000.txt',x,0)
+#etl('xss-200000.txt',x,1)
+#etl('good-xss-200000.txt',x,0)
 
 
-#x_train, x_test, y_train, y_test = cross_validation.train_test_split(x,y, test_size=0.4, random_state=0)
+x_train, x_test, y_train, y_test = cross_validation.train_test_split(x,y, test_size=0.4, random_state=0)
 
-#clf = svm.SVC(kernel='linear', C=1).fit(x_train, y_train)
-clf=joblib.load("xss-svm-50000-module.m")
-y_test=clf.predict(x)
-print y_test
-print len(y_test)
-print len(y)
-print clf.score(y,y_test)
-#y_test=clf.predit(x_test)
+clf = svm.SVC(kernel='linear', C=1).fit(x_train, y_train)
+print clf.score(x_test, y_test)
 
-#print clf.score(x_test, y_test)
-
+joblib.dump(clf,"xss-svm-50000-module.m")
 
 '''
 with open("good-xss-200000.txt") as f:
