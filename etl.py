@@ -61,8 +61,10 @@ clf=joblib.load("xss-svm-50000-module.m")
 y_test=[]
 
 
-for a in x:
-    y_test.append(clf.predict(a))
+#for a in x:
+#    y_test.append(clf.predict(a))
+
+y_test=clf.predict(x)
 
 print metrics.accuracy_score(y_test, y)
 
