@@ -4,6 +4,7 @@ from sklearn import cross_validation
 from sklearn import datasets
 from sklearn import svm
 from sklearn.externals import  joblib
+from sklearn import metrics
 
 
 x = []
@@ -56,14 +57,15 @@ etl('good-xss-200000.txt',x,0)
 
 #clf = svm.SVC(kernel='linear', C=1).fit(x_train, y_train)
 clf=joblib.load("xss-svm-50000-module.m")
-y_test=clf.predict(x)
-print y_test
-print len(y_test)
-print len(y)
-print clf.score(y,y_test)
-#y_test=clf.predit(x_test)
 
-#print clf.score(x_test, y_test)
+y_test=[]
+
+
+for a in x:
+    y_test.append(clf.predict(a))
+
+print metrics.accuracy_score(y_test, y)
+
 
 
 '''
