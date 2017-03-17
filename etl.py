@@ -22,9 +22,11 @@ def get_evil_char(url):
     return len(re.findall("[<>,\'\"]", url, re.IGNORECASE))
 
 def get_evil_word(url):
-    return len(re.findall("(alert)|(script)|(%3c)|(%3e)|(%20)|(onerror)|(onload)|(eval)|(src=)|(prompt)",url,re.IGNORECASE))
+    return len(re.findall("(alert)|(script=)(%3c)|(%3e)|(%20)|(onerror)|(onload)|(eval)|(src=)|(prompt)",url,re.IGNORECASE))
 
 
+def get_feature(url):
+    return [get_len(url),get_url_count(url),get_evil_char(url),get_evil_word(url)]
 
 def etl(filename,data,isxss):
     try:
@@ -52,5 +54,11 @@ x_train, x_test, y_train, y_test = cross_validation.train_test_split(x,y, test_s
 clf = svm.SVC(kernel='linear', C=1).fit(x_train, y_train)
 print clf.score(x_test, y_test)
 
-
-
+'''
+with open("good-xss-200000.txt") as f:
+    for line in f:
+#clf.predict([[2., 2.]])
+        predict=clf.predict(get_feature(line))
+        if predict == 1:
+            print("maybe guest error xss %s") % (line)
+'''
