@@ -56,6 +56,8 @@ x_train, x_test, y_train, y_test = cross_validation.train_test_split(x,y, test_s
 clf = svm.SVC(kernel='linear', C=1).fit(x_train, y_train)
 print clf.score(x_test, y_test)
 
+joblib.dump(clf,"xss-svm-50000-module.m")
+
 '''
 with open("good-xss-200000.txt") as f:
     for line in f:
