@@ -20,7 +20,7 @@ def get_url_count(url):
         return 0
 
 def get_evil_char(url):
-    return len(re.findall("[<>,\'\"]", url, re.IGNORECASE))
+    return len(re.findall("[<>,\'\"/]", url, re.IGNORECASE))
 
 def get_evil_word(url):
     return len(re.findall("(alert)|(script=)(%3c)|(%3e)|(%20)|(onerror)|(onload)|(eval)|(src=)|(prompt)",url,re.IGNORECASE))

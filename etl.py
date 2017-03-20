@@ -21,7 +21,7 @@ def get_url_count(url):
         return 0
 
 def get_evil_char(url):
-    return len(re.findall("[<>,\'\"]", url, re.IGNORECASE))
+    return len(re.findall("[<>,\'\"/]", url, re.IGNORECASE))
 
 def get_evil_word(url):
     return len(re.findall("(alert)|(script=)(%3c)|(%3e)|(%20)|(onerror)|(onload)|(eval)|(src=)|(prompt)",url,re.IGNORECASE))
@@ -70,11 +70,10 @@ print metrics.accuracy_score(y_test, y)
 
 
 
-'''
+
 with open("good-xss-200000.txt") as f:
     for line in f:
 #clf.predict([[2., 2.]])
         predict=clf.predict(get_feature(line))
         if predict == 1:
             print("maybe guest error xss %s") % (line)
-'''
