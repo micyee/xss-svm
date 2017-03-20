@@ -26,9 +26,14 @@ def get_evil_char(url):
 def get_evil_word(url):
     return len(re.findall("(alert)|(script=)(%3c)|(%3e)|(%20)|(onerror)|(onload)|(eval)|(src=)|(prompt)",url,re.IGNORECASE))
 
+def get_last_char(url):
+    if re.search('/$', url, re.IGNORECASE) :
+        return 1
+    else:
+        return 0
 
 def get_feature(url):
-    return [get_len(url),get_url_count(url),get_evil_char(url),get_evil_word(url)]
+    return [get_len(url),get_url_count(url),get_evil_char(url),get_evil_word(url),get_last_char(url)]
 
 def etl(filename,data,isxss):
     try:
@@ -38,7 +43,8 @@ def etl(filename,data,isxss):
             f2=get_url_count(line)
             f3=get_evil_char(line)
             f4=get_evil_word(line)
-            data.append([f1,f2,f3,f4])
+            f5=get_last_char(line)
+            data.append([f1,f2,f3,f4,f5])
             if isxss:
                 y.append(1)
             else:
@@ -71,7 +77,8 @@ print metrics.accuracy_score(y_test, y)
 
 
 
-with open("good-xss-200000.txt") as f:
+#with open("good-xss-200000.txt") as f:
+with open("waf-access.log") as f:
     for line in f:
 #clf.predict([[2., 2.]])
         predict=clf.predict(get_feature(line))
