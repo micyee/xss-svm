@@ -48,8 +48,7 @@ def etl(filename,data,isxss):
             f2=get_url_count(line)
             f3=get_evil_char(line)
             f4=get_evil_word(line)
-            f5=get_last_char(line)
-            data.append([f1,f2,f3,f4,f5])
+            data.append([f1,f2,f3,f4])
             if isxss:
                 y.append(1)
             else:
@@ -81,7 +80,7 @@ print metrics.accuracy_score(y_test, y)
 
 
 
-
+"""
 #with open("good-xss-200000.txt") as f:
 with open("waf-access.log") as f:
     for line in f:
@@ -89,3 +88,4 @@ with open("waf-access.log") as f:
         predict=clf.predict(get_feature(line))
         if predict == 1:
             print("maybe guest error xss %s") % (line)
+"""
