@@ -5,11 +5,18 @@ from sklearn import datasets
 from sklearn import svm
 from sklearn.externals import  joblib
 
+from svmxss import get_url_count
+from svmxss import get_evil_word
+from svmxss import get_evil_char
+from svmxss import get_len
+from svmxss import get_feature
+
 
 x = []
 y = []
 
 
+"""
 def get_len(url):
     return len(url)
 
@@ -33,6 +40,7 @@ def get_last_char(url):
 
 def get_feature(url):
     return [get_len(url),get_url_count(url),get_evil_char(url),get_evil_word(url),get_last_char(url)]
+"""
 
 def etl(filename,data,isxss):
     try:
@@ -42,8 +50,7 @@ def etl(filename,data,isxss):
             f2=get_url_count(line)
             f3=get_evil_char(line)
             f4=get_evil_word(line)
-            f5=get_last_char(line)
-            data.append([f1,f2,f3,f4,f5])
+            data.append([f1,f2,f3,f4])
             if isxss:
                 y.append(1)
             else:

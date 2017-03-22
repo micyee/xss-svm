@@ -6,11 +6,16 @@ from sklearn import svm
 from sklearn.externals import  joblib
 from sklearn import metrics
 
+from svmxss import get_last_char
+from svmxss import get_evil_word
+from svmxss import get_evil_char
+from svmxss import get_len
+from svmxss import get_feature
 
 x = []
 y = []
 
-
+"""
 def get_len(url):
     return len(url)
 
@@ -34,7 +39,7 @@ def get_last_char(url):
 
 def get_feature(url):
     return [get_len(url),get_url_count(url),get_evil_char(url),get_evil_word(url),get_last_char(url)]
-
+"""
 def etl(filename,data,isxss):
     try:
         file_object = open(filename)
